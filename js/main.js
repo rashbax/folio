@@ -3,15 +3,28 @@ let dark = document.querySelector('.dark');
 let light = document.querySelector('.day');
 
 dark.addEventListener("click",()=>{
-   if (link.getAttribute("href")=="./style/style.css") {
-      link.href = "./style/dark.css"
-   }
+   localStorage.setItem('theme', 'dark')
+   changeTheme()
 })
 light.addEventListener("click",()=>{
-   if (link.getAttribute("href")=="./style/dark.css") {
-      link.href = "./style/style.css"
-   }
+   localStorage.removeItem('theme')
+   changeTheme()
 })
+
+function changeTheme(){
+   if(localStorage.getItem('theme') === 'dark'){
+      link.href = "./style/dark.css"
+      light.classList.remove('theme__active')
+      dark.classList.add('theme__active')
+   }else{
+      link.href = "./style/style.css"
+      dark.classList.remove('theme__active')
+      light.classList.add('theme__active')
+   }
+   
+}
+
+changeTheme()
 
 
 
@@ -40,14 +53,6 @@ light.addEventListener("click",()=>{
     //     $('.dropdown').toggleClass("dshow")
     //  })
 
-    $('.dark').click(()=>{
-      $('.day').removeClass('theme__active')
-      $('.dark').addClass('theme__active')
-    })
-    $('.day').click(()=>{
-      $('.dark').removeClass('theme__active')
-      $('.day').addClass('theme__active')
-    })
 })
 
 // let str = document.querySelector('.str');
